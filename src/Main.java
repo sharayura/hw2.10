@@ -1,3 +1,5 @@
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class Main {
@@ -23,7 +25,23 @@ public class Main {
 
         System.out.println();
         ////////////////////////////
+        Map<String, Integer> task3 = new HashMap<>();
+        task3.put("key1", 5);
+        task3.put("key2", 24);
+        task3.put("key3", 10);
 
+        putInMap(task3, "key1", 50);
+        putInMap(task3, "key1", 50);
+
+
+    }
+
+    private static void putInMap(Map<String, Integer> task, String key, Integer value) {
+        if (!task.containsKey(key) || task.containsKey(key) && !task.get(key).equals(value)) {
+            task.put(key, value);
+        } else {
+            throw new RuntimeException("Такие ключ и значение уже есть!");
+        }
 
     }
 }
