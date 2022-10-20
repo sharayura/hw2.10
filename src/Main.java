@@ -1,47 +1,40 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
 
-        Phonebook phonebook1 = new Phonebook();
-
-        String[] firstnames = {"Василий", "Петр", "Андрей", "Иван", "Анатолий", "Илья", "Владимир", "Олег"};
-        String[] lastnames = {"Васильев", "Петров", "Ардреев", "Иванов", "Николаев", "Сидоров", "Владимиров"};
-
+        Map<String, List<Integer>> map1 = new HashMap<>(5);
         Random rand = new Random();
-        String firstname;
-        String lastname;
-        String number;
 
-        while (phonebook1.size() < 20) {
-            firstname = firstnames[rand.nextInt(firstnames.length)];
-            lastname = lastnames[rand.nextInt(lastnames.length)];
-            number = "+79" + (rand.nextInt(10) * 100_000_000 + rand.nextInt(100_000_000));
-            phonebook1.addPhone(firstname, lastname, number);
+        for (int i = 0; i < 5; i++) {
+            List<Integer> list = new ArrayList<>(3);
+            StringBuilder string = new StringBuilder("string");
+            for (int j = 0; j < 3; j++) {
+                list.add(rand.nextInt(1001));
+            }
+            map1.put((string.append(i).toString()), list);
         }
-        phonebook1.printPhonebook();
+        System.out.println(map1);
 
+        Map<String, Integer> map2 = new HashMap<>(5);
+        for (Map.Entry<String, List<Integer>> stringListEntry : map1.entrySet()) {
+            int sum = 0;
+            for (Integer integer : stringListEntry.getValue()) {
+                sum += integer;
+            }
+            map2.put(stringListEntry.getKey(), sum);
+        }
+        System.out.println(map2);
+
+        /////////////////////////////////
         System.out.println();
-        ////////////////////////////
-        Map<String, Integer> task3 = new HashMap<>();
-        task3.put("key1", 5);
-        task3.put("key2", 24);
-        task3.put("key3", 10);
 
-        putInMap(task3, "key1", 50);
-        putInMap(task3, "key1", 50);
-
-
-    }
-
-    private static void putInMap(Map<String, Integer> task, String key, Integer value) {
-        if (!task.containsKey(key) || task.containsKey(key) && !task.get(key).equals(value)) {
-            task.put(key, value);
-        } else {
-            throw new RuntimeException("Такие ключ и значение уже есть!");
+        Map<Integer, String> map3 = new LinkedHashMap<>(10);
+        for (int i = 0; i < 10; i++) {
+            StringBuilder string = new StringBuilder("string");
+            map3.put(rand.nextInt(100), (string.append(i).toString()));
         }
+        System.out.println(map3);
 
     }
 }
